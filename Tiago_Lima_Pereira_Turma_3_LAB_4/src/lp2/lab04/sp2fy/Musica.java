@@ -79,7 +79,7 @@ public class Musica {
 	}
 
 	public String toString(){
-		return String.format("%s (%s - %d minutos)", 
-				this.getTitulo(), this.getGenero(), this.getDuracao());
+		return this.getTitulo() + "(" + this.getGenero() + " - " + this.getDuracao() + " minutos)";
+		
 	}
 }

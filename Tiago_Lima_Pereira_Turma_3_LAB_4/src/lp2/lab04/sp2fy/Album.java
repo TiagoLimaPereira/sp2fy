@@ -25,13 +25,12 @@ public class Album {
 	}
 	
 	
-	public boolean adicionaMusica(Musica musica) {
+	public boolean adicionaMusica(Musica musica){
 		if(musica == null){
 			return false;
 		}
 		else{
-			this.musicas.add(musica);
-			return true;
+			return this.musicas.add(musica);
 		}
 	}
 	
@@ -84,6 +83,7 @@ public class Album {
 		return null;
 	}
 	
+	// Busca musica pela faixa
 	public Musica getMusica(int faixa){
 		if(faixa > 0 && faixa <= this.musicas.size()){
 			return this.musicas.get(faixa - 1);
@@ -165,10 +165,10 @@ public class Album {
 	}
 	
 	public String toString(){
-		String saida = String.format("%s, %s (%d)\n\n", 
-				this.getTitulo(), this.getArtista(), this.getAno());
+		final String FIM_LINHA = System.getProperty("line.separator");
+		String saida = this.getTitulo() + ", " + this.getArtista() + " (" + this.getAno() + ")" + FIM_LINHA;	
 		for(int i = 0; i < this.musicas.size(); i = i + 1){
-			saida += String.format("%d. %s\n",(i+1), this.musicas.get(i));
+			saida += (i+1) + ". " + this.musicas.get(i).toString() + FIM_LINHA;
 		}
 		return saida;
 	}

@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 public class Musiteca {
-	HashSet<Album> meusAlbuns;
-	HashSet<Album> albunsFavoritos;
-	HashMap<String, ArrayList<Musica>> playList;
+	private HashSet<Album> meusAlbuns;
+	private HashSet<Album> albunsFavoritos;
+	private HashMap<String, ArrayList<Musica>> playList;
 	
 	
 	public Musiteca() {
