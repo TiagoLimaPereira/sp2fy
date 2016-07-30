@@ -25,55 +25,54 @@ public class Album {
 	}
 	
 	
-	public boolean adicionaMusica(Musica musica){
+	public boolean adicionaMusica(Musica musica)throws Exception{
 		if(musica == null){
-			return false;
+			throw new Exception("Musica nao pode ser nulo.");
 		}
-		else{
-			return this.musicas.add(musica);
-		}
+		return this.musicas.add(musica);
 	}
 	
 	// Remove musica pelo nome
-	public boolean removeMusica(String musicaTitulo) {
-		if(musicaTitulo != null && !musicaTitulo.trim().isEmpty()
-				&& this.musicas.size() > 0){
-			for(int i = 0; i < this.musicas.size(); i = i + 1){
-				if(this.musicas.get(i).getTitulo().equalsIgnoreCase(musicaTitulo)){
-					this.musicas.remove(i);
-					return true;
-				}
+	public boolean removeMusica(String musicaTitulo)throws Exception {
+		if(musicaTitulo == null || musicaTitulo.trim().isEmpty()
+				|| this.musicas.size() == 0){
+			throw new Exception("Album nao pode ser vazio e titulo da musica pode ser nulo ou vazio.");
+			}
+		for(int i = 0; i < this.musicas.size(); i = i + 1){
+			if(this.musicas.get(i).getTitulo().equalsIgnoreCase(musicaTitulo)){
+				this.musicas.remove(i);
+				return true;
 			}
 		}
 		return false;	
 	}
 	
 	// Remove musica pela faixa
-	public boolean removeMusica(int faixa) {
-		if(faixa > 0 && this.musicas.size() > 0){
-			this.musicas.remove(faixa - 1);
-			return true;
+	public boolean removeMusica(int faixa)throws Exception {
+		if(faixa < 1 || faixa > this.musicas.size()){
+			throw new Exception("faixa invalida.");
 		}
-		return false;	
+		this.musicas.remove(faixa - 1);
+		return true;	
 	}
 	
 	// Busca a existencia da musica pelo nome e retorna boolean
-	public boolean contemMusica(String musicaTitulo){
-		if(musicaTitulo != null && !musicaTitulo.trim().isEmpty()
-				&& this.musicas.size() > 0){
-			for(int i = 0; i < this.musicas.size(); i = i + 1){
-				if(this.musicas.get(i).getTitulo().equalsIgnoreCase(musicaTitulo)){
-					return true;
+	public boolean contemMusica(String musicaTitulo)throws Exception{
+		if(musicaTitulo == null || musicaTitulo.trim().isEmpty()
+				|| this.musicas.size() > 0){
+			throw new Exception("Album nao pode ser vazio e titulo da musica pode ser nulo ou vazio.");
 				}
+	for(int i = 0; i < this.musicas.size(); i = i + 1){
+		if(this.musicas.get(i).getTitulo().equalsIgnoreCase(musicaTitulo)){
+			return true;
 			}
 		}
 		return false;
 	}
 	
 	// Busca musica pelo nome
-	public Musica getMusica(String musicaTitulo){
-		if(musicaTitulo != null && !musicaTitulo.trim().isEmpty()
-				&& this.musicas.size() > 0){
+	public Musica getMusica(String musicaTitulo)throws Exception{
+		if(this.contemMusica(musicaTitulo)){
 			for(int i = 0; i < this.musicas.size(); i = i + 1){
 				if(this.musicas.get(i).getTitulo().equalsIgnoreCase(musicaTitulo)){
 					return this.musicas.get(i);
@@ -84,12 +83,11 @@ public class Album {
 	}
 	
 	// Busca musica pela faixa
-	public Musica getMusica(int faixa){
-		if(faixa > 0 && faixa <= this.musicas.size()){
-			return this.musicas.get(faixa - 1);
-		}else{
-			return null;
+	public Musica getMusica(int faixa)throws Exception{
+		if(faixa < 1 || faixa > this.musicas.size()){
+			throw new Exception("Faixa invalida.");
 		}
+		return this.musicas.get(faixa - 1);
 	}
 		
 	public int quantidadeFaixas(){
