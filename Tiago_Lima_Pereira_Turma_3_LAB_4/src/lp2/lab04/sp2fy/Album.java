@@ -1,4 +1,5 @@
 package lp2.lab04.sp2fy;
+/*115210912 - Tiago Lima Pereira: LAB 4 - Turma 3*/
 
 import java.util.ArrayList;
 
@@ -25,11 +26,12 @@ public class Album {
 	}
 	
 	
-	public boolean adicionaMusica(Musica musica)throws Exception{
+	public boolean adicionaMusica(Musica musica){
 		if(musica == null){
-			throw new Exception("Musica nao pode ser nulo.");
+			return false;
+		}else{
+			return this.musicas.add(musica);
 		}
-		return this.musicas.add(musica);
 	}
 	
 	// Remove musica pelo nome
@@ -56,21 +58,20 @@ public class Album {
 		return true;	
 	}
 	
-	// Busca a existencia da musica pelo nome e retorna boolean
+	// Busca a existencia da musica pelo nome
 	public boolean contemMusica(String musicaTitulo)throws Exception{
-		if(musicaTitulo == null || musicaTitulo.trim().isEmpty()
-				|| this.musicas.size() > 0){
-			throw new Exception("Album nao pode ser vazio e titulo da musica pode ser nulo ou vazio.");
-				}
-	for(int i = 0; i < this.musicas.size(); i = i + 1){
-		if(this.musicas.get(i).getTitulo().equalsIgnoreCase(musicaTitulo)){
-			return true;
+		if(musicaTitulo == null || musicaTitulo.trim().isEmpty()){
+			throw new Exception("Titulo da musica pode ser nulo ou vazio.");
+			}
+		for(int i = 0; i < this.musicas.size(); i = i + 1){
+			if(this.musicas.get(i).getTitulo().equalsIgnoreCase(musicaTitulo)){
+				return true;
 			}
 		}
 		return false;
 	}
 	
-	// Busca musica pelo nome
+	// Busca musica pelo nome e a retorna
 	public Musica getMusica(String musicaTitulo)throws Exception{
 		if(this.contemMusica(musicaTitulo)){
 			for(int i = 0; i < this.musicas.size(); i = i + 1){
@@ -82,7 +83,7 @@ public class Album {
 		return null;
 	}
 	
-	// Busca musica pela faixa
+	// Busca musica pela faixa e a retorna
 	public Musica getMusica(int faixa)throws Exception{
 		if(faixa < 1 || faixa > this.musicas.size()){
 			throw new Exception("Faixa invalida.");
@@ -94,6 +95,7 @@ public class Album {
 		return this.musicas.size();
 	}
 	
+	// retorna a duracao total do album
 	public int getDuracaoTotal(){
 		int duracaoTotal = 0;
 		if(musicas.size() > 0){

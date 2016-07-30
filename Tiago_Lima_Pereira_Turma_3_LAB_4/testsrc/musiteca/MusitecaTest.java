@@ -46,7 +46,7 @@ public class MusitecaTest {
 	}
 
 	@Test
-	public void testCriaEAddPlaylist() {
+	public void testCriaEAddPlaylist()throws Exception {
 		// cria uma playlist vazia, mas nao pode
 		// criar mais de uma playlist com
 		// o mesmo titulo.
@@ -77,7 +77,7 @@ public class MusitecaTest {
 	}
 
 	@Test
-	public void testExeptionCases() {
+	public void testExeptionCases()throws Exception {
 		//adicao e criacao com valores null
 		// sao tratados com retorno de booleanos
 		// como consta no enunciado do lab.

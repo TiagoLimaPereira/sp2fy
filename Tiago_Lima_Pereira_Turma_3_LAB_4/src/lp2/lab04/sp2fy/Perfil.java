@@ -1,4 +1,5 @@
 package lp2.lab04.sp2fy;
+/*115210912 - Tiago Lima Pereira: LAB 4 - Turma 3*/
 
 public class Perfil {
 	private String nomeUsuario;
@@ -9,6 +10,7 @@ public class Perfil {
 		this.musiteca = new Musiteca();
 	}
 	
+	// Adiciona um album na musiteca
 	public boolean adicionaAlbum(Album album){
 		try{
 			return musiteca.addAlbum(album);
@@ -19,10 +21,10 @@ public class Perfil {
 		}
 	}
 	
-	public boolean adicionaAlbum(String titulo, String artista, int ano){
+	// adiciona um album na musiteca com outros parametros
+	public boolean adicionaAlbum(String artista, String titulo, int ano){
 		try{
-			Album album = new Album(titulo, artista, ano);
-			return musiteca.addAlbum(album);
+			return musiteca.addAlbum(artista, titulo, ano);
 		}catch(Exception e){
 			System.out.println("Erro na adicao de album na musiteca.");
 			System.out.println(e.getMessage());
@@ -30,6 +32,7 @@ public class Perfil {
 		}
 	}
 	
+	// remove um album da musiteca
 	public boolean removeAlbum(Album album){
 		try{
 			return musiteca.removeAlbum(album);
@@ -40,10 +43,10 @@ public class Perfil {
 		}
 	}
 	
+	// remove um album da musiteca pelo titulo
 	public boolean removeAlbum(String tituloAlbum){
 		try{
-			Album album = musiteca.getAlbum(tituloAlbum);
-			return musiteca.removeAlbum(album);
+			return musiteca.removeAlbum(tituloAlbum);
 		}catch(Exception e){
 			System.out.println("Erro na remocao de album na musiteca.");
 			System.out.println(e.getMessage());
@@ -51,6 +54,7 @@ public class Perfil {
 		}
 	}
 	
+	// adiciona um album favorito da musiteca
 	public boolean adicionaFavorito(Album album){
 		try{
 			return musiteca.addAosFavoritos(album);
@@ -61,10 +65,10 @@ public class Perfil {
 		}
 	}
 	
+	// adiciona um album favorito da musiteca pelo titulo
 	public boolean adicionaFavorito(String tituloAlbum){
 		try{
-			Album album = musiteca.getAlbum(tituloAlbum);
-			return musiteca.addAosFavoritos(album);
+			return musiteca.addAosFavoritos(tituloAlbum);
 		}catch(Exception e){
 			System.out.println("Erro na adicao de album favorito na musiteca.");
 			System.out.println(e.getMessage());
@@ -72,6 +76,7 @@ public class Perfil {
 		}
 	}
 	
+	// remove um album favorito
 	public boolean removeFavorito(Album album){
 		try{
 			return musiteca.removeDosFavoritos(album);
@@ -82,10 +87,10 @@ public class Perfil {
 		}
 	}
 	
+	// remove um album favorito da musiteca pelo nome
 	public boolean removeFavorito(String tituloAlbum){
 		try{
-			Album album = musiteca.getAlbum(tituloAlbum);
-			return musiteca.removeDosFavoritos(album);
+			return musiteca.removeDosFavoritos(tituloAlbum);
 		}catch(Exception e){
 			System.out.println("Erro na remocao de album favorito na musiteca.");
 			System.out.println(e.getMessage());
@@ -111,6 +116,8 @@ public class Perfil {
 		}
 	}
 	
+	// aidiciona uma faixa de um determinado album na playlist
+	// se a playlist nao existe ela eh criada (se o album e a faixa existirem)
 	public boolean adicionaNaPlaylist(String nomePlaylist, String nomeAlbum, int faixaAlbum){
 		try{
 			return musiteca.addNaPlaylist(nomePlaylist, nomeAlbum, faixaAlbum);
@@ -121,6 +128,32 @@ public class Perfil {
 		}
 	}
 	
+	// busca uma determinada musica em uma determinada playlist
+	public boolean buscaMusicaPlaylist(String nomePlaylist, String nomeMusica){
+		try{
+			return musiteca.contemNaPlaylist(nomePlaylist, nomeMusica);
+		}catch(Exception e){
+			System.out.println("Erro ao buscar musica na playlist.");
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+	
+	// busca playlist pelo nome
+	public boolean buscaPlaylist(String nomePlaylist){
+		return musiteca.contemPlaylist(nomePlaylist);
+	}
+	
+	public int getTamanhoPlaylist(String nomePlaylist){
+		try{
+			return musiteca.getTamPlaylist(nomePlaylist);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			return 0;
+		}
+		
+	}
+	
 	public String getNomeUsuario(){
 		return this.nomeUsuario;
 	}
@@ -129,5 +162,32 @@ public class Perfil {
 		this.nomeUsuario = novoNome;
 	}
 	
-	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((musiteca == null) ? 0 : musiteca.hashCode());
+		result = prime * result + ((nomeUsuario == null) ? 0 : nomeUsuario.hashCode());
+		return result;
+	}
+
+	// um perfil eh igual ao outro se possuirem o mesmo nome e a mesma musiteca (equals da musiteca implementado)
+	@Override
+	public boolean equals(Object objeto) {
+		if(objeto instanceof Perfil){
+			Perfil outroPerfil = (Perfil) objeto;
+			if(outroPerfil.getNomeUsuario().equalsIgnoreCase(this.nomeUsuario)
+					&& outroPerfil.musiteca.equals(this.musiteca)){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
+
+	public String toString(){
+		return musiteca.toString();
+	}
 }
