@@ -54,6 +54,14 @@ public class Perfil {
 		}
 	}
 	
+	public boolean buscaAlbum(Album album){
+		return musiteca.contemAlbum(album);
+	}
+	
+	public boolean buscaAlbum(String tituloAlbum){
+		return musiteca.contemAlbum(tituloAlbum);
+	}
+	
 	// adiciona um album favorito da musiteca
 	public boolean adicionaFavorito(Album album){
 		try{
@@ -171,7 +179,7 @@ public class Perfil {
 		return result;
 	}
 
-	// um perfil eh igual ao outro se possuirem o mesmo nome e a mesma musiteca (equals da musiteca implementado)
+	// um perfil eh igual ao outro se possuir o mesmo nome e a mesma musiteca (equals da musiteca implementado)
 	@Override
 	public boolean equals(Object objeto) {
 		if(objeto instanceof Perfil){
@@ -188,6 +196,8 @@ public class Perfil {
 	}
 
 	public String toString(){
-		return musiteca.toString();
+		final String FIM_LINHA = System.getProperty("line.separator");
+		String saida = "==>Usuario: " + this.nomeUsuario + FIM_LINHA + musiteca.toString();
+		return saida;
 	}
 }
